@@ -11,9 +11,9 @@
 25.4.23~25.4.27
 ###  개발 환경
 - `JDK 21`
-- **IDE** : STS 3.9
+- **IDE** : Eclipse
 - **Framework** : Eclipse
-- **Database** : Eclipce file
+- **Database** : Eclipce txt.file
 
 
 ##  주요 기능
