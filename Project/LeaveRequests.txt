@@ -1,1 +1,0 @@
-LeaveRequest [empNo=1, reason=오렌지 병, status=대기, days=0, type=병가]

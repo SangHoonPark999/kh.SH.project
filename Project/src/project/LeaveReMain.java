@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 //휴가연차 저장클래스
 public class LeaveReMain {
-	private static final String FILE_PATH = "src/project/LeaveRequests.txt";
+	private static final String FILE_PATH = "LeaveRequests.txt";
 
     // 파일읽기
     public static ArrayList<LeaveRe> loadRequests() {
