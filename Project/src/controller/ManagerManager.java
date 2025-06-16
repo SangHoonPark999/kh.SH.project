@@ -53,7 +53,7 @@ public class ManagerManager {
 		
 	}//login end
 
-	//사원정보조회
+//사원정보조회
 	public void eList() {
 		ManagerDAO md = new ManagerDAO();
 		ArrayList<EmpListVO> empList = md.eList();
@@ -71,7 +71,6 @@ public class ManagerManager {
 							+ " 잔여연차 : %d | 관리자 여부 : %d \n",data.getEmpNo(), data.getEmpName(), data.getEmpPosition(), data.getBirthDate(), data.getJoinDate(), data.getPhoneNumber(), data.getRemainDay(), data.getIsAdmin() );
 		}
 		System.out.println();
-		
 		
 	}//eList end
 

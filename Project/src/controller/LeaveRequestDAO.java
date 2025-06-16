@@ -9,13 +9,14 @@ import java.util.ArrayList;
 
 import model.EmpListVO;
 import model.EmployeeVO;
+import model.LeaveBalanceVO;
 
 public class LeaveRequestDAO {
 	private String SELECTEmployeeNoALSQL = "SELECT EMP_NO, EMP_NAME, JOIN_DATE, EMP_POSITION FROM EMPLOYEE";
-	private String SELECTEmployeeALListSQL = "SELECT * FROM LEAVE_REQUEST ";
-	private String INSERTEmployeeALSQL = "INSERT INTO ";
+	private String INSERTEmployeeALByempNoSQL = "INSERT INTO LEAVE_BALANCE VALUES (LEAVE_BALANCE_SEQ.NEXTVAL, EMP_NO=?, LEAVE_YEAR= SYSDATE, REMAIN_DAY=?)";
+	private String SELECTEmployeeALListSQL = "SELECT * FROM LEAVE_REQUEST";
 	
-	// 연차/병가 신청자 확인 리스트
+// 연차/병가 신청자 확인 리스트
 	public ArrayList<EmpListVO> eList() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -50,8 +51,8 @@ public class LeaveRequestDAO {
 		}
 		return empList;
 	}//list end
-//사원 연차 부여 (연차없는 사원리스트 출력 => 사원번호 선택하여 연차 입력)
-//연차없는 사원 리스트
+	//사원 연차 부여 (연차없는 사원리스트 출력 => 사원번호 선택하여 연차 입력)
+//--연차없는 사원 리스트
 	public ArrayList<EmployeeVO> noALList() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -85,5 +86,28 @@ public class LeaveRequestDAO {
 		}
 		return noALList;
 	}//noALList end
-	
+//연차부여 리스트
+	public int empALInsert(LeaveBalanceVO leaveBalanceVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			con = DBUtil.getConnection();
+			if (con == null) {
+				System.out.println("DB connect fail");
+				return -1;
+			}
+			pstmt = con.prepareStatement(INSERTEmployeeALByempNoSQL);
+			pstmt.setInt(1, leaveBalanceVO.getEmpNo());
+			pstmt.setInt(2, leaveBalanceVO.getRemainDay());
+			
+			count = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("createStatement 오류발생");
+		} finally {
+			DBUtil.dbClose(con, pstmt);
+		}
+		return count;
+	}
 }

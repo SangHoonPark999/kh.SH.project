@@ -9,7 +9,7 @@ public class LeaveRequestVO {
 	private Date startDate; 	//시작일자
 	private Date endDate;		//종료일자
 	private String reason;		//사유
-	private String status;		//상태(대기, 반려, 승인)
+	private String status;		//상태(대기 Stay, 반려 refuse, 승인 approve)
 	
 	public LeaveRequestVO() {
 		super();

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import controller.DBUtil;
 import controller.EmployeeManager;
+import controller.LeaveRequestManager;
 import controller.ManagerManager;
 import view.EmployeeChoice;
 import view.MainChoice;
@@ -53,37 +54,43 @@ public class LeaveRequestMain {
 	}//main end
 	//employeeMenu
 	public static void employeeMenu() {
-		int choice = 0;
-		boolean exitFlag = false;
-		// main
-		while (!exitFlag) {
-			try {
-				//사원로그인
-				EmployeeManager em = new EmployeeManager();
-				em.eLogin();
-				MainView.employeeMenu();
-				choice = Integer.parseInt(scan.nextLine());
-				switch (choice) {
-				//연차,병가신청
-				case EmployeeChoice.REQUEST:
-					
-					break;
-				//연차, 병가 신청현황
-				case EmployeeChoice.REQUESTCHECK:
-					break;
-				
-				case EmployeeChoice.EXIT:
-					System.out.println("EXIT");
-					exitFlag = true;
-					break;
-				}//switch end
-			} catch (Exception e) {
-				System.out.println("사원메뉴 오류발생");
-				exitFlag = true;
-			}
-		} // while end
+		EmployeeManager em = new EmployeeManager();
+		try {
+			em.eLogin();
+		} catch (Exception e) {
+			System.out.println("사원메뉴 오류발생");
+			e.printStackTrace();
+		}
 		
-	}
+//		int choice = 0;
+//		boolean exitFlag = false;
+//		// main
+//		while (!exitFlag) {
+//			try {
+//				//사원로그인
+//				choice = Integer.parseInt(scan.nextLine());
+//				switch (choice) {
+//				//연차,병가신청
+//				case EmployeeChoice.REQUEST:
+//					
+//					break;
+//				//연차, 병가 신청현황
+//				case EmployeeChoice.REQUESTCHECK:
+//					
+//					break;
+//				
+//				case EmployeeChoice.EXIT:
+//					System.out.println("EXIT");
+//					exitFlag = true;
+//					break;
+//				}//switch end
+//			} catch (Exception e) {
+//				System.out.println("사원메뉴 오류발생");
+//				exitFlag = true;
+//			}
+//		} // while end
+		
+	}//employeeMenu.end
 	//managerMenu
 	public static void managerMenu() {
 		int choice = 0;
@@ -93,6 +100,7 @@ public class LeaveRequestMain {
 		while (!exitFlag) {
 			try {
 				ManagerManager mm = new ManagerManager();
+				LeaveRequestManager lm = new LeaveRequestManager();
 				mm.mLogin();
 				MainView.managerMenu();
 				choice = Integer.parseInt(scan.nextLine());
@@ -115,9 +123,11 @@ public class LeaveRequestMain {
 					break;
 			//병가/연차 확인
 				case ManagerChoice.REQUESTLIST:
+					
 					break;
 				//연차등록
 				case ManagerChoice.ANNUALLEAVE:
+					lm.empALRegi();
 					break;
 				//관리자모드 종료
 				case ManagerChoice.EXIT:
