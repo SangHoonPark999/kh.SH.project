@@ -77,7 +77,7 @@ public class EmployeeManager {
 		}
 		MainView.employeeMenu();
 		
-		// 연차/병가 신청 및 신청현황
+		// 연차/병가 신청 및 신청
 		while (!exitFlag) {
 			try {
 				choice = Integer.parseInt(scan.nextLine());

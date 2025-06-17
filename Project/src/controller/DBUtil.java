@@ -60,6 +60,30 @@ public class DBUtil {
 			}
 		}
 	}
+	public static void dbClose(Connection con, PreparedStatement pstmt1, PreparedStatement pstmt2) {
+		if (pstmt1 != null) {
+			try {
+				pstmt1.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (pstmt2 != null) {
+			try {
+				pstmt2.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static void dbClose(Connection con, PreparedStatement pstmt) {
 		if (pstmt != null) {

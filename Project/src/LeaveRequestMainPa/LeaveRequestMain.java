@@ -123,7 +123,7 @@ public class LeaveRequestMain {
 					break;
 			//병가/연차 확인
 				case ManagerChoice.REQUESTLIST:
-					
+					mm.requestAR();
 					break;
 				//연차등록
 				case ManagerChoice.ANNUALLEAVE:
