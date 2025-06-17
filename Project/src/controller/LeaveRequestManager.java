@@ -59,7 +59,6 @@ public class LeaveRequestManager {
 		
 		int count = lrdao.empALInsert(lvo);
 		
-		scan.close();
 		if (count == 0) {
 			System.out.println("연차부여 입력오류발생");
 			return;

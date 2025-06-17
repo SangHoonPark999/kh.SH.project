@@ -57,6 +57,37 @@ public class ManagerDAO {
 		}
 		return mLoginCheck;
 	}//mLogin end
+	public boolean eLoginCheck(EmployeeVO employeeVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean mLoginCheck = false;
+		try {
+			con = DBUtil.getConnection();
+			if (con == null) {
+				System.out.println("DB connect fail");
+			}
+			pstmt = con.prepareStatement(selectMLoginSQL);
+			pstmt.setInt(1, employeeVO.getEmpNo());
+			pstmt.setString(2, employeeVO.getEmpPassword());
+			rs = pstmt.executeQuery();
+			if (rs.next()) { 
+				int isAdmin =rs.getInt("IS_ADMIN");
+				if(isAdmin == 0 || isAdmin == 1) {
+					mLoginCheck = true;
+				}else {
+					System.out.println("권한이 없습니다.");
+					mLoginCheck = false;
+				}
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("createStatement 오류발생");
+		} finally {
+			DBUtil.dbClose(con, pstmt, rs);
+		}
+		return mLoginCheck;
+	}//eLogin end
 	
 //사원정보리스트
 	public ArrayList<EmpListVO> eList() {

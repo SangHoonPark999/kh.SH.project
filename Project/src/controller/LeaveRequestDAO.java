@@ -14,10 +14,10 @@ import model.LeaveBalanceVO;
 import model.LeaveRequestVO;
 
 public class LeaveRequestDAO {
-	private String SELECTEmployeeNoALSQL = "SELECT EMP_NO, EMP_NAME, JOIN_DATE, EMP_POSITION FROM EMPLOYEE";
+	private String SELECTEmployeeNoALSQL = "SELECT * FROM EMPLOYEE";
 	private String INSERTEmployeeALByempNoSQL = "INSERT INTO LEAVE_BALANCE VALUES (LEAVE_BALANCE_SEQ.NEXTVAL, EMP_NO=?, LEAVE_YEAR= SYSDATE, REMAIN_DAY=?)";
 	private String SELECTEmployeeALListSQL = "SELECT * FROM LEAVE_REQUEST";
-	private String SELECTErequestListSQL = "SELECT E.EMP_NO, E.EMP_NAME, E.EMP_POSITION, R.LEAVE_TYPE, R.START_DATE, R.END_DATE, R.REASON, R.STATUS\r\n"
+	private String SELECTErequestListSQL = "SELECT *\r\n"
 			+ "FROM EMPLOYEE E, LEAVE_REQUEST R\r\n"
 			+ "WHERE E.EMP_NO = R.EMP_NO;";
 	private String UPDATErequestApproveSQL = "UPDATE LEAVE_REQUEST SET STATUS = 'APPROVE' WHERE EMP_NO = ? AND START_DATE = TO_DATE(?,'YYYY-MM-DD') AND END_DATE = TO_DATE(?,'YYYY-MM-DD') AND STATUS = 'STAY'";
@@ -27,7 +27,7 @@ public class LeaveRequestDAO {
 	private String UPDATEsickRequestRefuseSQL = "UPDATE LEAVE_REQUEST SET STATUS = 'REFUSE' WHERE EMP_NO = ? AND LEAVE_TYPE = '병가'";
 	
 	
-// 연차/병가 신청자 확인 리스트
+// 사원 리스트
 	public ArrayList<EmpListVO> eList() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -135,14 +135,14 @@ public class LeaveRequestDAO {
 			pstmt = con.prepareStatement(SELECTErequestListSQL);
 			rs = pstmt.executeQuery();
 			while (rs.next()) { 
-				int empNo = rs.getInt("EMP_NO");
-				String empName = rs.getString("EMP_NAME");
-				String empPosition = rs.getString("EMP_POSITION");
-				String leaveType = rs.getString("LEAVE_TYPE");
-				String startDate = rs.getString("START_DATE");
-				String endDate = rs.getString("END_DATE");
-				String reason = rs.getString("REASON");
-				String status = rs.getString("STATUS");
+				int empNo = rs.getInt("E.EMP_NO");
+				String empName = rs.getString("E.EMP_NAME");
+				String empPosition = rs.getString("E.EMP_POSITION");
+				String leaveType = rs.getString("R.LEAVE_TYPE");
+				String startDate = rs.getString("R.START_DATE");
+				String endDate = rs.getString("R.END_DATE");
+				String reason = rs.getString("R.REASON");
+				String status = rs.getString("R.STATUS");
 				
 				EmpRequestVO empRequestVO = new EmpRequestVO(empNo,empName,empPosition,leaveType,startDate,endDate,reason,status);
 				requestList.add(empRequestVO);

@@ -38,7 +38,7 @@ public class EmployeeManager {
 			empPassword =scan.nextLine();
 			
 			EmployeeVO employeeVO = new EmployeeVO(empNo, empPassword,empName,empPosition,birthDate,joinDate,phoneNumber,isAdmin);
-			employeeCk = managerDAO.mLoginCheck(employeeVO);
+			employeeCk = managerDAO.eLoginCheck(employeeVO);
 			if(employeeCk == false) {
 				System.out.println("사원 로그인 실패");
 				employeeCk = false;
@@ -109,12 +109,12 @@ public class EmployeeManager {
 						
 						int count = edao.employeeALInsert(lrvo);
 
-						scan.close();
 						if (count == 0) {
 							System.out.println("연차입력 오류발생");
 							return;
 						} else {
 							System.out.println("연차신청 완료");
+							MainView.employeeMenu();
 						}
 						
 						break;
@@ -128,12 +128,12 @@ public class EmployeeManager {
 						
 						int _count = edao.empSLInsert(lrvo);
 
-						scan.close();
 						if (_count == 0) {
 							System.out.println("병가신청 오류발생");
 							return;
 						} else {
 							System.out.println("병가신청 완료");
+							MainView.employeeMenu();
 						}
 						break;
 					//종료

@@ -180,7 +180,7 @@ public class ManagerManager {
 
 		int count = mdao.empInsert(ev);
 
-		scan.close();
+		
 		if (count == 0) {
 			System.out.println("사원정보 수정의 입력오류발생");
 			return;

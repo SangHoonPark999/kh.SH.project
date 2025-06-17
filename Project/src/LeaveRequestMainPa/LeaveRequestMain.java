@@ -62,33 +62,7 @@ public class LeaveRequestMain {
 			e.printStackTrace();
 		}
 		
-//		int choice = 0;
-//		boolean exitFlag = false;
-//		// main
-//		while (!exitFlag) {
-//			try {
-//				//사원로그인
-//				choice = Integer.parseInt(scan.nextLine());
-//				switch (choice) {
-//				//연차,병가신청
-//				case EmployeeChoice.REQUEST:
-//					
-//					break;
-//				//연차, 병가 신청현황
-//				case EmployeeChoice.REQUESTCHECK:
-//					
-//					break;
-//				
-//				case EmployeeChoice.EXIT:
-//					System.out.println("EXIT");
-//					exitFlag = true;
-//					break;
-//				}//switch end
-//			} catch (Exception e) {
-//				System.out.println("사원메뉴 오류발생");
-//				exitFlag = true;
-//			}
-//		} // while end
+
 		
 	}//employeeMenu.end
 	//managerMenu
