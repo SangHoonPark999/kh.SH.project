@@ -15,14 +15,14 @@ import model.LeaveBalanceVO;
 
 public class ManagerDAO {
 	private String selectMLoginSQL = "SELECT * FROM EMPLOYEE WHERE EMP_NO = ? AND EMP_PASSWORD = ?";
-	private String selectByListSQL = "SELECT E.EMP_NO, E.EMP_NAME, E.EMP_PASSWORD, E.EMP_POSITION, E.BIRTH_DATE, E.JOIN_DATE, E.PHONE_NUMBER, L.REMAIN_DAY, E.IS_ADMIN\r\n"
-			+ "FROM EMPLOYEE E, LEAVE_BALANCE L\r\n"
-			+ "WHERE E.EMP_NO = L.EMP_NO";
+	private String selectByListSQL = "SELECT *\r\n"
+									+ "FROM EMPLOYEE E, LEAVE_BALANCE L\r\n"
+									+ "WHERE E.EMP_NO = L.EMP_NO";
 	private String empUpdateByEmployeeSQL = "UPDATE EMPLOYEE\r\n"
-			+ "SET EMP_NAME = ?, EMP_PASSWORD = ? ,EMP_POSITION = ?, BIRTH_DATE = ?, JOIN_DATE = ?, PHONE_NUMBER = ?,  IS_ADMIN = ?\r\n"
-			+ "WHERE EMP_NO = ?";
+											+ "SET EMP_NAME = ?, EMP_PASSWORD = ? ,EMP_POSITION = ?, BIRTH_DATE = ?, JOIN_DATE = ?, PHONE_NUMBER = ?,  IS_ADMIN = ?\r\n"
+											+ "WHERE EMP_NO = ?";
 	private String insertByEmployeeSQL = "INSERT INTO EMPLOYEE VALUES (EMPLOYEE_SEQ.nextval,?,?,?,?,SYSDATE,?,?)";
-	private String deleteEmplyeeByEmpNoSQL = "DELETE FROM EMPLOYEE WHERE EMP_NO = ?";
+	private String deleteEmployeeByEmpNoSQL = "DELETE FROM EMPLOYEE WHERE EMP_NO = ?";
 	
 	
 //관리자로그인
@@ -90,7 +90,7 @@ public class ManagerDAO {
 	}//eLogin end
 	
 //사원정보리스트
-	public ArrayList<EmpListVO> eList() {
+	public ArrayList<EmpListVO> eList(EmpListVO empListVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -113,8 +113,8 @@ public class ManagerDAO {
 				int remainDay = rs.getInt("REMAIN_DAY");
 				int isAdmin = rs.getInt("IS_ADMIN");
 				
-				EmpListVO empListVO = new EmpListVO(empNo,empName,empPassword,empPosition,birthDate,joinDate,phoneNumber,remainDay,isAdmin);
-				empList.add(empListVO);
+				EmpListVO _empListVO = new EmpListVO(empNo,empName,empPassword,empPosition,birthDate,joinDate,phoneNumber,remainDay,isAdmin);
+				empList.add(_empListVO);
 			}
 
 		} catch (SQLException e) {
@@ -198,7 +198,7 @@ public class ManagerDAO {
 				System.out.println("DB connect fail");
 				return -1;
 			}
-			pstmt = con.prepareStatement(deleteEmplyeeByEmpNoSQL);
+			pstmt = con.prepareStatement(deleteEmployeeByEmpNoSQL);
 
 			pstmt.setInt(1, employeeVO.getEmpNo());
 

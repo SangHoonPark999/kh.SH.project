@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import model.EmployeeVO;
 import model.LeaveBalanceVO;
+import view.MainView;
 
 public class LeaveRequestManager {
 	//연차,병가확인 (리스트확인=>(승인,반려,나가기)선택지=> 승인or반려시 DB 데이터 변경)
@@ -68,6 +69,7 @@ public class LeaveRequestManager {
 		System.out.println("연차 부여된 사원 현황");
 		mm.eList();
 		System.out.println();
+		MainView.managerMenu();
 	}//empALRegi
 
 

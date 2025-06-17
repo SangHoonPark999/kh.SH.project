@@ -11,6 +11,7 @@ import model.EmpListVO;
 import model.EmpRequestVO;
 import model.EmployeeVO;
 import model.LeaveRequestVO;
+import view.MainView;
 
 public class ManagerManager {
 //관리자로그인
@@ -57,7 +58,8 @@ public class ManagerManager {
 //사원정보조회
 	public void eList() {
 		ManagerDAO md = new ManagerDAO();
-		ArrayList<EmpListVO> empList = md.eList();
+		EmpListVO elvo = new EmpListVO();
+		ArrayList<EmpListVO> empList = md.eList(elvo);
 		if (empList.size() == 0) {
 			System.out.println("사원리스트 내용이 없습니다");
 			return;
@@ -66,14 +68,10 @@ public class ManagerManager {
 			return;
 		}
 		for (EmpListVO data : empList) {
-			// System.out.println(data.toString());
-			System.out.printf(
-					"사원번호 : %d | 사원이름 : %s | 직급 : %s " + " 생년월일 : %s | 입사일 : %s | 전화번호 : %s"
-							+ " 잔여연차 : %d | 관리자 여부 : %d \n",
+			System.out.printf("사원번호 : %d | 사원이름 : %s | 직급 : %s  생년월일 : %s | 입사일 : %s | 전화번호 : %s 잔여연차 : %d | 관리자 여부 : %d \n",
 					data.getEmpNo(), data.getEmpName(), data.getEmpPosition(), data.getBirthDate(), data.getJoinDate(),
 					data.getPhoneNumber(), data.getRemainDay(), data.getIsAdmin());
 		}
-		System.out.println();
 
 	}// eList end
 
@@ -154,7 +152,7 @@ public class ManagerManager {
 		String phoneNumber;
 		int isAdmin;
 
-		System.out.println("신규사원의 번호를 입력해주세요.");
+		System.out.println("신규사원의 비밀번호를 입력해주세요.");
 		System.out.println("비밀번호 : (최대 12자까지 입력해주세요.)");
 		empPassword = scan.nextLine();
 		System.out.println("이름 : (최대 4글자까지 입력해주세요.)");
@@ -182,13 +180,12 @@ public class ManagerManager {
 
 		
 		if (count == 0) {
-			System.out.println("사원정보 수정의 입력오류발생");
-			return;
+			System.out.println("사원정보 등록의 입력오류발생");
+			
 		} else {
-			System.out.println("사원정보 수정의 완료");
+			System.out.println("사원정보 등력 완료");
+			MainView.managerMenu();
 		}
-		System.out.println("수정된 사원정보 리스트");
-		eList();
 		System.out.println();
 
 	}// empRegi end
@@ -197,6 +194,7 @@ public class ManagerManager {
 	public void empDelete() throws Exception {
 		Scanner scan = new Scanner(System.in);
 		EmployeeVO ev = new EmployeeVO();
+		EmpListVO elvo = new EmpListVO();
 		ManagerDAO mdao = new ManagerDAO();
 
 		int empNo; // 입력한 일련번호
@@ -217,13 +215,15 @@ public class ManagerManager {
 		System.out.println();
 		eList();
 		System.out.println();
+		MainView.managerMenu();
 	}
 
 //연차, 병가 신청자 리스트
 	public void requestList() throws Exception {
 		Scanner scan = new Scanner(System.in);
 		LeaveRequestDAO lrdao = new LeaveRequestDAO();
-		ArrayList<EmpRequestVO> requestList = lrdao.requestList();
+		EmpRequestVO ervo = new EmpRequestVO();
+		ArrayList<EmpRequestVO> requestList = lrdao.requestList(ervo);
 		if (requestList.size() == 0) {
 			System.out.println("연차, 병가 지원자 내용이 없습니다");
 			return;
@@ -239,6 +239,7 @@ public class ManagerManager {
 					data.getStatus(), data.getReason());
 		}
 		System.out.println();
+		
 
 	}// requestList end
 //연차병가 승인거부
@@ -335,6 +336,7 @@ public class ManagerManager {
 				break;
 
 			case 3:
+				MainView.managerMenu();
 				exitFlag = true;
 				break;
 

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.EmpInfoVO;
 import model.EmployeeVO;
@@ -140,11 +141,11 @@ public class EmployeeDAO {
 		return count;
 	}
 //연차, 병가 신청현황
-	public LeaveRequestVO leaveRequestStatus(LeaveRequestVO leaveRequestVO) {
+	public ArrayList<LeaveRequestVO> leaveRequestStatus(LeaveRequestVO leaveRequestVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		LeaveRequestVO _leaveRequestVO = null;
+		ArrayList<LeaveRequestVO> requestList = new ArrayList<LeaveRequestVO>();
 		try {
 			con = DBUtil.getConnection();
 			if (con == null) {
@@ -154,7 +155,7 @@ public class EmployeeDAO {
 			pstmt = con.prepareStatement(selectStatusSQL);
 			pstmt.setInt(1, leaveRequestVO.getEmpNo());
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				int reqNo = rs.getInt("REQ_NO");
 				int empNo = rs.getInt("EMP_NO");
 				String leaveType = rs.getString("LEAVE_TYPE");
@@ -162,8 +163,8 @@ public class EmployeeDAO {
 				Date endDate = rs.getDate("END_DATE");
 				String reason = rs.getString("REASON");
 				String status = rs.getString("STATUS");
-				_leaveRequestVO = new LeaveRequestVO(reqNo, empNo, leaveType, startDate, endDate, reason, status);
-				
+				LeaveRequestVO _leaveRequestVO = new LeaveRequestVO(reqNo, empNo, leaveType, startDate, endDate, reason, status);
+				requestList.add(_leaveRequestVO);
 			}
 
 		} catch (SQLException e) {
@@ -171,7 +172,7 @@ public class EmployeeDAO {
 		} finally {
 			DBUtil.dbClose(con, pstmt, rs);
 		}
-		return _leaveRequestVO;
+		return requestList;
 	}//leaveRequestStatus end
 	
 	

@@ -69,14 +69,18 @@ public class LeaveRequestMain {
 	public static void managerMenu() {
 		int choice = 0;
 		boolean exitFlag = false;
+		ManagerManager mm = new ManagerManager();
+		LeaveRequestManager lm = new LeaveRequestManager();
+		try {
+			mm.mLogin();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		MainView.managerMenu();
 
 		// main
 		while (!exitFlag) {
 			try {
-				ManagerManager mm = new ManagerManager();
-				LeaveRequestManager lm = new LeaveRequestManager();
-				mm.mLogin();
-				MainView.managerMenu();
 				choice = Integer.parseInt(scan.nextLine());
 				switch (choice) {
 			//사원정보리스트

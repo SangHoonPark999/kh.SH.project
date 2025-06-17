@@ -13,6 +13,7 @@ public class EmpListVO {
 	private String phoneNumber; //전화번호 000-XXXX-XXXX
 	private int remainDay;		//잔여 연차
 	private int isAdmin;		//사원 = 1, 관리자 = 0
+	
 	public EmpListVO() {
 		super();
 	}

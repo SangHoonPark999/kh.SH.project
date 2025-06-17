@@ -146,10 +146,13 @@ public class EmployeeManager {
 				//연차, 병가 신청현황
 				case EmployeeChoice.REQUESTCHECK:
 					lrvo.setEmpNo(empNo);
-					LeaveRequestVO leaveStatus = edao.leaveRequestStatus(lrvo);
+					ArrayList<LeaveRequestVO> requestList = edao.leaveRequestStatus(lrvo);
 					if(result != null) {
-						System.out.printf("사원번호 :	%d | 휴가 유형 : %s | 상  태 : %s\n",leaveStatus.getEmpNo(), leaveStatus.getLeaveType(), leaveStatus.getStatus());
-						System.out.printf("사  유 :	%s ",leaveStatus.getReason());
+						for(LeaveRequestVO data : requestList) {
+							System.out.printf("사원번호 :	%d | 휴가 유형 : %s | 상  태 : %s\n",data.getEmpNo(), data.getLeaveType(), data.getStatus());
+							System.out.printf("사  유 :	%s \n",data.getReason());
+							
+						}
 						MainView.employeeMenu();
 						break;
 					}else {
