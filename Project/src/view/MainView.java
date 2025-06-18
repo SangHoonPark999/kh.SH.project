@@ -21,7 +21,7 @@ public class MainView {
 	}
 	//manager menu
 	public static void managerMenu() {
-		System.out.println("관리자 메뉴 입니다.");
+		
 		System.out.println("번호를 입력해주세요.");
 		System.out.println("1. 사원 정보 조회");
 		System.out.println("2. 사원 정보 수정");

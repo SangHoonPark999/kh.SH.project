@@ -72,12 +72,13 @@ public class ManagerManager {
 					data.getEmpNo(), data.getEmpName(), data.getEmpPosition(), data.getBirthDate(), data.getJoinDate(),
 					data.getPhoneNumber(), data.getRemainDay(), data.getIsAdmin());
 		}
-
+		System.out.println();
+		
 	}// eList end
 
 //사원정보수정
 	public void empUpdate() throws Exception {
-		try (Scanner scan = new Scanner(System.in)) {
+		Scanner scan = new Scanner(System.in);
 			EmployeeVO ev = new EmployeeVO();
 			ManagerDAO mdao = new ManagerDAO();
 
@@ -124,20 +125,16 @@ public class ManagerManager {
 
 			int count = mdao.eUpdate(ev);
 
-			scan.close();
 			if (count == 0) {
 				System.out.println("사원정보 수정의 입력오류발생");
-				return;
+				
 			} else {
 				System.out.println("사원정보 수정의 완료");
 			}
-			System.out.println("수정된 사원정보 리스트");
-			eList();
+			
 			System.out.println();
-		} catch (Exception e) {
-			System.out.println("오류 발생: " + e.getMessage());
-			e.printStackTrace();
-		}
+			MainView.managerMenu();
+			System.out.println();
 	}// empUpdate end
 
 //신규사원등록
@@ -216,6 +213,7 @@ public class ManagerManager {
 		eList();
 		System.out.println();
 		MainView.managerMenu();
+		System.out.println();
 	}
 
 //연차, 병가 신청자 리스트

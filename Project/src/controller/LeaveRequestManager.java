@@ -70,6 +70,7 @@ public class LeaveRequestManager {
 		mm.eList();
 		System.out.println();
 		MainView.managerMenu();
+		System.out.println();
 	}//empALRegi
 
 

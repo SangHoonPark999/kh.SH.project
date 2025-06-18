@@ -76,7 +76,10 @@ public class LeaveRequestMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("관리자 메뉴 입니다.");
+		System.out.println();
 		MainView.managerMenu();
+		System.out.println();
 
 		// main
 		while (!exitFlag) {
@@ -86,6 +89,7 @@ public class LeaveRequestMain {
 			//사원정보리스트
 				case ManagerChoice.EMPLOYEELIST:
 					mm.eList();
+					MainView.managerMenu();
 					break;
 			//사원정보수정
 				case ManagerChoice.EMPLOYEEUPDATE:
