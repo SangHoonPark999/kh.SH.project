@@ -13,7 +13,7 @@
 - `JDK 21`
 - **IDE** : Eclipse
 - **Framework** : Eclipse
-- **Database** : Eclipce txt.file
+- **Database** : oracle
 
 
 ##  주요 기능
